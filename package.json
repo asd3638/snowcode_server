@@ -1,0 +1,16 @@
+{
+  "name": "snowcode_server",
+  "version": "1.0.0",
+  "description": "솔룩스 2021-1 프로젝트 snowcode server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mysql2": "^2.2.5",
+    "sequelize": "^6.6.5",
+    "sequelize-cli": "^6.2.0"
+  }
+}
