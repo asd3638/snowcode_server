@@ -1,16 +1,21 @@
 {
-  "name": "snowcode_server",
-  "version": "1.0.0",
-  "description": "솔룩스 2021-1 프로젝트 snowcode server",
-  "main": "index.js",
+  "name": "snowcode-server",
+  "version": "0.0.1",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "ZeroCho",
+  "license": "MIT",
   "dependencies": {
-    "mysql2": "^2.2.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.0",
+    "nunjucks": "^3.2.3",
     "sequelize": "^6.6.5",
     "sequelize-cli": "^6.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }

@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+/*const Sequelize = require('sequelize')
 
 module.exports = class User extends Sequelize.Model{
     static init(sequelize){
@@ -15,6 +15,9 @@ module.exports = class User extends Sequelize.Model{
                 type: Sequelize.STRING(20),
                 allowNull: false,
                 unique: true,
+                validate:{
+                    isEmail: true
+                },
             },
 
             nickName: {
@@ -55,6 +58,10 @@ module.exports = class User extends Sequelize.Model{
                 defaultValue : 10,
             },
 
+            salt:{
+                type: Sequelize.DataTypes.STRING
+            },
+
         }, {
             sequelize,
             timestamps: false,
@@ -67,4 +74,72 @@ module.exports = class User extends Sequelize.Model{
         });
     }
 
+};*/
+
+
+
+'use strict';
+module.exports = (sequelize, DataTypes) => {
+  var user = sequelize.define('user', {
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement : true,
+        primaryKey : true,
+        allowNull: false,
+        unique: true,
+    },
+
+    mail: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        unique: true,
+        validate:{
+            isEmail: true
+        },
+    },
+
+    nickName: {
+        type: Sequelize.STRING(20),
+        allowNull: false,
+        unique: true,
+    },
+
+    password:{
+        type: Sequelize.STRING(20),
+        allowNull: false,
+    },
+
+    provider:{
+        type: Sequelize.STRING(10),
+    },
+ 
+    snsId:{
+        type: Sequelize.INTEGER.UNSIGNED,
+    },
+
+    studentId:{
+        type: Sequelize.INTEGER.UNSIGNED,
+        allowNull: false,
+        unique : true,
+    },
+
+    major:{
+        type: Sequelize.STRING(20),
+    },
+
+    userInfo:{
+        type: Sequelize.TEXT,
+        allowNull: true,
+    },
+    score:{ 
+        type: Sequelize.INTEGER,
+        defaultValue : 10,
+    },
+
+    salt:{
+        type: Sequelize.DataTypes.STRING
+    }
+  });
+
+  return user;
 };

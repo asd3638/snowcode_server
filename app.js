@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
@@ -47,3 +48,12 @@ app.use((err, req, res, next) => {
 app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트에서 대기 중');
 });
+*/
+const models = require("./models/index.js");
+
+models.sequelize.sync().then( () => {
+    console.log(" DB 연결 성공");
+}).catch(err => {
+    console.log("연결 실패");
+    console.log(err);
+})
