@@ -10,7 +10,8 @@ module.exports = class User extends Sequelize.Model {
       },
       nick: {
         type: Sequelize.STRING(15),
-        allowNull: false,
+        allowNull: true,
+        defaultValue: '아무개'
       },
       password: {
         type: Sequelize.STRING(100),
@@ -25,22 +26,6 @@ module.exports = class User extends Sequelize.Model {
         type: Sequelize.STRING(30),
         allowNull: true,
       },
-      major: {
-        type: Sequelize.STRING(30),
-        allowNull: true,
-      },
-      studentId: {
-        type: Sequelize.STRING(30),
-        allowNull: true,
-      },
-      userInfo: {
-        type: Sequelize.STRING(30),
-        allowNull: true,
-      },
-      score: {
-        type: Sequelize.STRING(30),
-        allowNull: true,
-      },
     }, {
       sequelize,
       timestamps: true,
@@ -50,6 +35,20 @@ module.exports = class User extends Sequelize.Model {
       paranoid: true,
       charset: 'utf8',
       collate: 'utf8_general_ci',
+    });
+  }
+
+  static associate(db) {
+    db.User.hasMany(db.Post);
+    db.User.belongsToMany(db.User, {
+      foreignKey: 'followingId',
+      as: 'Followers',
+      through: 'Follow',
+    });
+    db.User.belongsToMany(db.User, {
+      foreignKey: 'followerId',
+      as: 'Followings',
+      through: 'Follow',
     });
   }
 };
