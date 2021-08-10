@@ -54,10 +54,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors);
 
-app.use('/api/', pageRouter);
+app.use('/api', pageRouter);
 app.use('/api/auth', authRouter);
-app.use('/api/chat', chatRouter);
-app.use('/api/check', checkRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
@@ -74,5 +72,3 @@ app.use((err, req, res, next) => {
 const server = app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
-
-webSocket(server, app, sessionMiddleware);
