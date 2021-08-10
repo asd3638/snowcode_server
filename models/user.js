@@ -52,4 +52,8 @@ module.exports = class User extends Sequelize.Model {
       collate: 'utf8_general_ci',
     });
   }
+  static associate(db) {
+    db.User.hasMany(db.Room, { sourceKey: 'id' });
+    db.User.hasMany(db.Chat, { sourceKey: 'id' });
+  }
 };
