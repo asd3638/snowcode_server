@@ -32,14 +32,14 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       return next(authError);
     }
     if (!user) {
-      return res.send(404, "failed");
+      return res.send("fail");
     }
     return req.login(user, (loginError) => {
       if (loginError) {
         console.error(loginError);
         return next(loginError);
       }
-      return res.json(req.user.user_id);
+      return res.send(200, user);
     });
   })(req, res, next); // 미들웨어 내의 미들웨어에는 (req, res, next)를 붙입니다.
 });
