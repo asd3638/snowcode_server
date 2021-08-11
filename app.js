@@ -11,13 +11,13 @@ const cors = require('cors');
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
-const chatRouter = require('./routes/chat')
-const checkRouter = require('./routes/check')
-const webSocket = require('./routes/socket')
+const postRouter = require('./routes/post');
+const userRouter = require('./routes/user');
 const { sequelize } = require('./models');
 const passportConfig = require('./passport');
 
 const app = express();
+app.use(cors());
 passportConfig(); // 패스포트 설정
 app.set('port', process.env.PORT || 8001);
 app.set('view engine', 'html');
@@ -33,29 +33,20 @@ sequelize.sync({ force: false })
     console.error(err);
   });
 
-  const sessionMiddleware = session({
-  resave: false,
-  saveUninitialized: false,
-  secret: process.env.COOKIE_SECRET,
-  cookie: {
-    httpOnly: true,
-    secure: false,
-  },
-});
-
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(sessionMiddleware);
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cors);
 
-app.use('/api', pageRouter);
-app.use('/api/auth', authRouter);
+app.use('/', pageRouter);
+app.use('/auth', authRouter);
+app.use('/post', postRouter);
+app.use('/user', userRouter);
 
 app.use((req, res, next) => {
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
