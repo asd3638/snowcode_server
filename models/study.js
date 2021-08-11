@@ -20,7 +20,7 @@ module.exports = class Post extends Sequelize.Model{
             sequelize,
             timestamps: false,
             modelName: 'Study',
-            tableName: 'studys',
+            tableName: 'studies',
             paranoid: false,
             charset: 'utf8mb4',
             collate: 'utf8mb4_general_ci',
