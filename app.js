@@ -41,7 +41,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cors);
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
@@ -60,6 +59,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
 });
 
-const server = app.listen(app.get('port'), () => {
+app.listen(app.get('port'), () => {
   console.log(app.get('port'), '번 포트에서 대기중');
 });
