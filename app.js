@@ -9,7 +9,7 @@ const passport = require('passport');
 const cors = require('cors');
 
 dotenv.config();
-const pageRouter = require('./routes/page');
+//const mypageRouter = require('./routes/mypage');
 const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 const userRouter = require('./routes/user');
@@ -42,7 +42,7 @@ app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', pageRouter);
+//app.use('/mypage', mypageRouter);
 app.use('/auth', authRouter);
 app.use('/post', postRouter);
 app.use('/user', userRouter);

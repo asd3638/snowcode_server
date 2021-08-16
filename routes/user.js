@@ -34,4 +34,33 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+
+router.route('/:id')
+  .patch(async (req, res, next) => {
+    try {
+      const result = await User.update({
+        info : req.body.info,
+        major : req.body.major,
+        github : req.body.github,
+      }, {
+        where: { id: req.params.id },
+      });
+      res.json(result);
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  })
+
+  //삭제
+  .delete(async (req, res, next) => {
+    try {
+      const result = await User.destroy({ where: { id: req.params.id } });
+      res.json(result);
+    } catch (err) {
+      console.error(err);
+      next(err);
+    }
+  });
+
 module.exports = router;
