@@ -11,7 +11,6 @@ module.exports = class User extends Sequelize.Model {
       nick: {
         type: Sequelize.STRING(15),
         allowNull: true,
-        defaultValue: '아무개'
       },
       password: {
         type: Sequelize.STRING(100),
@@ -27,7 +26,7 @@ module.exports = class User extends Sequelize.Model {
         allowNull: true,
       },
       info:{
-        type: Sequelize.STRING(30),
+        type: Sequelize.TEXT,
         allowNull: true,
       },
       major:{
@@ -36,6 +35,10 @@ module.exports = class User extends Sequelize.Model {
       },
       github:{
         type: Sequelize.STRING(30),
+        allowNull: true,
+      },
+      img: {
+        type: Sequelize.STRING(100),
         allowNull: true,
       },
 
