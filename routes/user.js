@@ -2,6 +2,7 @@ const express = require('express');
 
 const { isLoggedIn } = require('./middlewares');
 const User = require('../models/user');
+const Study = require('../models/study');
 
 const router = express.Router();
 
@@ -31,6 +32,22 @@ router.get('/:id', async (req, res, next) => {
   } catch (error) {
     console.error(error);
     next(error);
+  }
+});
+
+router.get('/:id/studies', async (req, res, next) => {
+  try {
+    const studies = await Study.findAll({
+      include: {
+        model: User,
+        where: { id: req.params.id },
+      },
+    });
+    console.log(studies);
+    res.json(studies);
+  }catch (err) {
+    console.log(err);
+    next(err);
   }
 })
 
