@@ -26,6 +26,18 @@ module.exports = class User extends Sequelize.Model {
         type: Sequelize.STRING(30),
         allowNull: true,
       },
+      info:{
+        type: Sequelize.STRING(30),
+        allowNull: true,
+      },
+      major:{
+        type: Sequelize.STRING(30),
+        allowNull: true,
+      },
+      github:{
+        type: Sequelize.STRING(30),
+        allowNull: true,
+      },
     }, {
       sequelize,
       timestamps: true,
