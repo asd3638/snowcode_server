@@ -16,6 +16,22 @@ router.get('/:id', async (req, res, next) => {
     console.error(error);
     next(error);
   }
+});
+
+router.get('/:id/studies', async (req, res, next) => {
+  try {
+    const studies = await Study.findAll({
+      include: {
+        model: User,
+        where: { id: req.params.id },
+      },
+    });
+    console.log(studies);
+    res.json(studies);
+  }catch (err) {
+    console.log(err);
+    next(err);
+  }
 })
 
 
