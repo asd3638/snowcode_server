@@ -11,6 +11,32 @@ module.exports = class Post extends Sequelize.Model{
                 type: Sequelize.TEXT,
                 allowNull: true,
             },
+            category: {
+                type: Sequelize.STRING(100),
+                allowNull: false,
+            },
+            heart: {
+                type: Sequelize.BOOLEAN,
+                allowNull: false,
+                defaultValue: 0,
+            },
+            deadLine: {
+                type: Sequelize.DATE,
+                allowNull: false,
+            },
+            startLine: {
+                type: Sequelize.DATE,
+                allowNull: false,
+            },
+            people: {
+                type: Sequelize.INTEGER.UNSIGNED,
+                allowNull: false,
+            },
+            wanted: {
+                type: Sequelize.TEXT,
+                allowNull: true,
+                //unique: true,
+            },
             create_at: {
                 type: Sequelize.DATE,
                 allowNull: true,
