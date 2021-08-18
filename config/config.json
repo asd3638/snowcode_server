@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "",
-    "database": "nodebird",
+    "password": "mysql",
+    "database": "snowcode",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": 0

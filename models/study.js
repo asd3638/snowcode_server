@@ -15,11 +15,6 @@ module.exports = class Study extends Sequelize.Model{
                 type: Sequelize.STRING(100),
                 allowNull: false,
             },
-            heart: {
-                type: Sequelize.BOOLEAN,
-                allowNull: false,
-                defaultValue: 0,
-            },
             deadLine: {
                 type: Sequelize.DATE,
                 allowNull: false,
@@ -54,5 +49,6 @@ module.exports = class Study extends Sequelize.Model{
     }
     static associate(db){
         db.Study.belongsTo(db.User, { foreignKey: 'writter', targetKey: 'id'});
+        db.Study.hasOne(db.Heart, { foreignKey: 'study_id', targetKey: 'id'});
     }
 };

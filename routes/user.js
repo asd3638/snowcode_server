@@ -18,6 +18,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
+
 router.get('/:id/studies', async (req, res, next) => {
   try {
     const studies = await Study.findAll({
@@ -34,7 +35,7 @@ router.get('/:id/studies', async (req, res, next) => {
   }
 })
 
-
+//회원정보 수정
 router.route('/:id')
   .patch(async (req, res, next) => {
     try {
