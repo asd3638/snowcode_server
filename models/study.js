@@ -54,5 +54,6 @@ module.exports = class Study extends Sequelize.Model{
     }
     static associate(db){
         db.Study.belongsTo(db.User, { foreignKey: 'writter', targetKey: 'id'});
+        db.Study.hasMany(db.Comment, {foreignKey: 'board', sourceKey: 'id'});
     }
 };

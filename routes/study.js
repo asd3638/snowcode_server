@@ -1,5 +1,5 @@
 const express = require('express');
-const { User, Study } = require('../models');
+const { User, Study, Comment } = require('../models');
 
 const router = express.Router();
 
@@ -50,6 +50,22 @@ router.get('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+router.get('/:id/studies/:id', async (req, res, next) => {
+  try {
+    const comments = await Comment.findAll({
+      include: {
+        model: Study,
+        where: { id: req.params.id },
+      },
+    });
+    console.log(comments);
+    res.json(comments);
+  }catch (err) {
+    console.log(err);
+    next(err);
+  }
+})
 
 
 router.route('/:id')

@@ -1,6 +1,7 @@
 const express = require('express');
 const User = require('../models/user');
 const Study = require('../models/study');
+const Comment = require('../models/comment');
 
 const router = express.Router();
 
@@ -34,6 +35,21 @@ router.get('/:id/studies', async (req, res, next) => {
   }
 })
 
+router.get('/:id/comments', async (req, res, next) => {
+  try {
+    const comments = await Comment.findAll({
+      include: {
+        model: User,
+        where: { id: req.params.id },
+      },
+    });
+    console.log(comments);
+    res.json(comments);
+  }catch (err) {
+    console.log(err);
+    next(err);
+  }
+})
 
 router.route('/:id')
   .patch(async (req, res, next) => {
