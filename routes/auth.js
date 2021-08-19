@@ -8,9 +8,13 @@ const router = express.Router();
 router.post('/join', async (req, res, next) => {
   const { email, password, nick } = req.body;
   try {
-    const exUser = await User.findOne({ where: { email } });
-    if (exUser) {
-      return res.send("already exist");
+    const exUserEmail = await User.findOne({ where: { email } });
+    const exUserNick = await User.findOne({ where: { nick } });
+    if (exUserEmail) {
+      return res.send("aee");
+    }
+    if (exUserNick) {
+      return res.send("aen");
     }
     const hash = await bcrypt.hash(password, 12);
     await User.create({
