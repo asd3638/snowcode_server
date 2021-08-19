@@ -6,12 +6,13 @@ const Comment = require('../models/comment');
 const router = express.Router();
 
 router.post('/create', async (req, res, next) => {
-  const { comment, commenter, study } = req.body;
+  const { comment, commenter, study, userNick } = req.body;
   try {
     await Comment.create({
       comment,
       commenter,
-      study
+      study,
+      userNick
     });
     return res.send("success");
   } catch (error) {
@@ -28,7 +29,7 @@ router.get('/:studyId', async (req, res, next) => {
             ['create_at', 'ASC']
         ]});
     if (comment) {
-      res.status(200).send(comment);
+        res.status(200).send(comment);
     } else {
       res.status(404).send('no any comment');
     }

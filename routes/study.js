@@ -110,25 +110,36 @@ router.get('/:id/studies/:id', async (req, res, next) => {
             wanted: req.body.wanted,   
             writter: req.body.writter,
         });
-
-        /*
-        const nick = await User.findAll({
-            include: {
-                model: User,
-                where: {id: req.params.id}
-            }
-        });
-        
-
-        detail = [studies, nick];
-        */
-       
-          console.log(studies);
           res.json(studies);
         }catch (err) {
           console.log(err);
           next(err);
         }
-    })
+    }
+)
+
+router.get('/category/:category/:id', async (req, res, next) => {
+    try {
+      const userList = [];
+      await (await User.findAll()).map(a => {
+          if (a.id == req.params.id) {
+            return
+          }
+          userList.push(a.id);
+      })
+    const study = await Study.findAll({where: {
+        writter: userList,
+        category: req.params.category
+    }});
+    if (study) {
+      res.status(200).send(study);
+    } else {
+      res.status(404).send('no any study');
+    }
+  } catch (error) {
+    console.error(error);
+    next(error);
+  }
+})
 
 module.exports = router;
